@@ -6,6 +6,12 @@ React DevTools可用作Chrome和Firefox浏览器的内置扩展。该软件包�
 [react-devtools](https://www.npmjs.com/package/react-devtools)
 
 ## 安装方法一（npm）
+
+1. 安装
+```
+$ npm i -g react-devtools
+```
+
 ## 安装方法二（本地）
 
 1. 下载`react-devtools`文件到本地。

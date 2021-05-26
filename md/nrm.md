@@ -1,5 +1,7 @@
 # nrm
 
+[nrm](https://www.npmjs.com/package/nrm)
+
 ## 介绍
 
 nrm是一个npm源管理工具，使用它可以快速切换npm源。
