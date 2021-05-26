@@ -4,7 +4,7 @@
 
 ## 介绍
 
-nrm是一个npm源管理工具，使用它可以快速切换npm源。
+`nrm`是一个`npm`源管理工具，使用它可以快速切换`npm`源。
 
 ## 安装
 
@@ -40,7 +40,7 @@ $ nrm add bbdops http://npm.bbdops.com/
 
 3. `nrm test [registry]`测试源速度
 
-不加registry时，可测所有源：
+不加`registry`时，可测所有源：
 ```
 $ nrm test
 

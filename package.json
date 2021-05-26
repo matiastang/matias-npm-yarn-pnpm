@@ -1,0 +1,22 @@
+{
+  "name": "matias-npm-yarn-pnpm",
+  "version": "1.0.0",
+  "description": "npm 学习、使用",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiastang/matias-npm-yarn-pnpm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matiastang/matias-npm-yarn-pnpm/issues"
+  },
+  "homepage": "https://github.com/matiastang/matias-npm-yarn-pnpm#readme",
+  "devDependencies": {
+    "matias-vuepress-cli": "^1.0.2"
+  }
+}
