@@ -2,7 +2,7 @@
  * @Author: tangdaoyong
  * @Date: 2021-05-26 11:11:19
  * @LastEditors: tangdaoyong
- * @LastEditTime: 2021-05-26 12:08:36
+ * @LastEditTime: 2021-05-26 14:00:49
  * @Description: node-sass
 -->
 # node-sass
@@ -83,7 +83,118 @@ npm config set registry=https://registry.npm.taobao.org
 // 如上使用 npm install 安装 node-sass、electron 和 phantomjs 时都能自动从淘宝源上下载。
 ```
 查阅源码发现可以设置环境变量`sass_binary_site`指定下载地址。
+`extension.js`文件中的获取方法。
+```js
+/**
+ * Determine the URL to fetch binary file from.
+ * By default fetch from the node-sass distribution
+ * site on GitHub.
+ *
+ * The default URL can be overridden using
+ * the environment variable SASS_BINARY_SITE,
+ * .npmrc variable sass_binary_site or
+ * or a command line option --sass-binary-site:
+ *
+ *   node scripts/install.js --sass-binary-site http://example.com/
+ *
+ * The URL should to the mirror of the repository
+ * laid out as follows:
+ *
+ * SASS_BINARY_SITE/
+ *
+ *  v3.0.0
+ *  v3.0.0/freebsd-x64-14_binding.node
+ *  ....
+ *  v3.0.0
+ *  v3.0.0/freebsd-ia32-11_binding.node
+ *  v3.0.0/freebsd-x64-42_binding.node
+ *  ... etc. for all supported versions and platforms
+ *
+ * @api public
+ */
 
+function getBinaryUrl() {
+  var site = getArgument('--sass-binary-site') ||
+             process.env.SASS_BINARY_SITE  ||
+             process.env.npm_config_sass_binary_site ||
+             (pkg.nodeSassConfig && pkg.nodeSassConfig.binarySite) ||
+             'https://github.com/sass/node-sass/releases/download';
+
+  return [site, 'v' + pkg.version, getBinaryName()].join('/');
+}
+
+/**
+ * Get binary dir.
+ * If environment variable SASS_BINARY_DIR,
+ * .npmrc variable sass_binary_dir or
+ * process argument --sass-binary-dir is provided,
+ * select it by appending binary name, otherwise
+ * use default binary dir.
+ * Once the primary selection is made, check if
+ * callers wants to throw if file not exists before
+ * returning.
+ *
+ * @api public
+ */
+
+function getBinaryDir() {
+  var binaryDir;
+
+  if (getArgument('--sass-binary-dir')) {
+    binaryDir = getArgument('--sass-binary-dir');
+  } else if (process.env.SASS_BINARY_DIR) {
+    binaryDir = process.env.SASS_BINARY_DIR;
+  } else if (process.env.npm_config_sass_binary_dir) {
+    binaryDir = process.env.npm_config_sass_binary_dir;
+  } else if (pkg.nodeSassConfig && pkg.nodeSassConfig.binaryDir) {
+    binaryDir = pkg.nodeSassConfig.binaryDir;
+  } else {
+    binaryDir = defaultBinaryDir;
+  }
+
+  return binaryDir;
+}
+
+/**
+ * Get binary path.
+ * If environment variable SASS_BINARY_PATH,
+ * .npmrc variable sass_binary_path or
+ * process argument --sass-binary-path is provided,
+ * select it by appending binary name, otherwise
+ * make default binary path using binary name.
+ * Once the primary selection is made, check if
+ * callers wants to throw if file not exists before
+ * returning.
+ *
+ * @api public
+ */
+
+function getBinaryPath() {
+  var binaryPath;
+
+  if (getArgument('--sass-binary-path')) {
+    binaryPath = getArgument('--sass-binary-path');
+  } else if (process.env.SASS_BINARY_PATH) {
+    binaryPath = process.env.SASS_BINARY_PATH;
+  } else if (process.env.npm_config_sass_binary_path) {
+    binaryPath = process.env.npm_config_sass_binary_path;
+  } else if (pkg.nodeSassConfig && pkg.nodeSassConfig.binaryPath) {
+    binaryPath = pkg.nodeSassConfig.binaryPath;
+  } else {
+    binaryPath = path.join(getBinaryDir(), getBinaryName().replace(/_(?=binding\.node)/, '/'));
+  }
+
+  if (process.versions.modules < 46) {
+    return binaryPath;
+  }
+
+  try {
+    return trueCasePathSync(binaryPath) || binaryPath;
+  } catch (e) {
+    return binaryPath;
+  }
+}
+```
 如上下载地址指定为：`https://npm.taobao.org/mirrors/node-sass`。
 
 4. 创建`.npmrc`文件
