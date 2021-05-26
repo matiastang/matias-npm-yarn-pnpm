@@ -25,7 +25,7 @@ $ git clone https://github.com/facebook/react-devtools.git
 ```
 $ npm --registry https://registry.npm.taobao.org install
 ```
-也可以使用[`nrm`]()换源后，直接运行指令
+也可以使用[`nrm`](https://github.com/matiastang/matias-npm-yarn-pnpm/blob/main/docs/md/nrm.md)换源后，直接运行指令
 ```
 $ npm install
 ```

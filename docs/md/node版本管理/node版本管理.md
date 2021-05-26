@@ -2,7 +2,7 @@
  * @Author: tangdaoyong
  * @Date: 2021-05-26 10:26:22
  * @LastEditors: tangdaoyong
- * @LastEditTime: 2021-05-26 10:40:58
+ * @LastEditTime: 2021-05-26 11:02:46
  * @Description: node版本管理
 -->
 # node版本管理
@@ -22,7 +22,7 @@
 
 `n`是`node`一个模块，可以用来管理和切换`node`版本，其作者是`TJ Holowaychuk`（出名的`Express`框架作者），使用非常之简单。
 
-具体使用请参照[`n.md`]()
+具体使用请参照[`n.md`](https://github.com/matiastang/matias-npm-yarn-pnpm/blob/main/docs/md/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/n.md)
 
 ## nvm
 
@@ -34,7 +34,7 @@ $ wget -qO- https://raw.github.com/creationix/nvm/v0.4.0/install.sh | sh
 ```
 独立的安装包，因此当你机器上没有安装node时仍可以使用它。
 
-具体使用请参照[`nvm.md`]()
+具体使用请参照[`nvm.md`](https://github.com/matiastang/matias-npm-yarn-pnpm/blob/main/docs/md/node%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/nvm.md)
 
 ## n 和 nvm 区别
 
